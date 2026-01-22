@@ -1,0 +1,4 @@
+[default_config]
+# Configure documentation available for features like hover and completions
+assembler = "ca65"
+instruction_set = "6502"
