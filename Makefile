@@ -6,8 +6,8 @@ lcd: lcd.bin
 write: lcd.write
 # write: blink.write
 
-%.bin: %.o eater.cfg
-	cl65 -o $@ -C eater.cfg $<
+%.bin: %.o be6502rom.cfg
+	cl65 --no-target-lib -o $@ -C be6502rom.cfg $<
 
 %.write: %.bin
 	minipro -p AT28C256 --write $<
