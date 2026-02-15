@@ -2,8 +2,10 @@ all: blink lcd
 
 blink: blink.bin
 lcd: lcd.bin
+serial_echo: serial_echo.bin
 
-write: lcd.write
+# write: lcd.write
+write: serial_echo.write
 # write: blink.write
 
 %.bin: %.o be6502rom.cfg
