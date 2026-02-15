@@ -7,16 +7,16 @@ write: lcd.write
 # write: blink.write
 
 %.bin: %.o be6502rom.cfg
-	cl65 --no-target-lib -o $@ -C be6502rom.cfg $<
+	cl65 --no-target-lib -o $@ -m $*.map -C be6502rom.cfg $<
 
 %.write: %.bin
 	minipro -p AT28C256 --write $<
 
 %.o: %.s
-	ca65 -o $@ $<
+	ca65 -o $@ -l $*.list $<
 
 clean:
-	-rm *.o *.bin
+	-rm *.o *.bin *.map *.list
 
 # Disable build-in rules
 .SUFFIXES:
