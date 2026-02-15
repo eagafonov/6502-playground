@@ -10,7 +10,7 @@ write: lcd.write
 	cl65 --no-target-lib -o $@ -m $*.map -C be6502rom.cfg $<
 
 %.write: %.bin
-	minipro -p AT28C256 --write $<
+	minipro --device AT28C256 --unprotect --protect --write $<
 
 %.o: %.s
 	ca65 -o $@ -l $*.list $<
