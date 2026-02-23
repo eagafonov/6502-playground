@@ -9,16 +9,16 @@ write: serial_echo.write
 # write: blink.write
 
 %.bin: %.o be6502rom.cfg
-	cl65 --no-target-lib -o $@ -m $*.map -C be6502rom.cfg $<
+	cl65 --cpu 65C02 --no-target-lib -o $@ -m $*.map -C be6502rom.cfg $<
 
 %.write: %.bin
 	minipro --device AT28C256 --unprotect --protect --write $<
 
 %.o: %.s
-	ca65 -o $@ -l $*.list $<
+	ca65 --cpu 65C02 -o $@ -l $*.list $<
 
 %.s: %.c
-	cc65 -o $@ $<
+	cc65 --cpu 65C02 -o $@ $<
 
 clean:
 	-rm *.o *.bin *.map *.list
