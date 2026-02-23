@@ -49,8 +49,22 @@ init_serial:
     lda #(ACIA_CTRL_19200pbs | ACIA_CTRL_RCS_BAUD | ACIA_CTRL_8bits | ACIA_CTRL_STOP_1)
     sta ACIA_CTRL
 
-    lda #%00001011 ; No parity, no IRQ
+    lda #%00001001 ; No parity, no IRQ
     sta ACIA_CMD
 
     pla
+    rts
+
+send_char:
+    sta ACIA_DATA
+    ;jsr tx_delay
+    rts
+
+tx_delay:
+    phx
+    ldx #100
+tx_delay_1:
+    dex
+    bne tx_delay_1
+    plx
     rts

@@ -3,7 +3,18 @@
 .segment "CODE"
 
 reset:
+    phx
+    plx
     jsr init_serial
+
+    lda #$0d
+    jsr send_char
+
+    lda #$0a
+    jsr send_char
+
+    lda #':'
+    jsr send_char
 
 loop:
 rx_wait:
@@ -13,8 +24,9 @@ rx_wait:
 
     ; read byte from serial
     lda ACIA_DATA
+
     ; write the byte back
-    sta ACIA_DATA
+    jsr send_char
 
     jmp loop
 
