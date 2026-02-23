@@ -1,5 +1,6 @@
   .org $8000
   .org $ff00
+  .segment "WOZMON"
 
 XAML  = $24                            ; Last "opened" location Low
 XAMH  = $25                            ; Last "opened" location High
@@ -187,7 +188,8 @@ TXDELAY:        DEC                    ; Decrement A.
                 PLA                    ; Restore A.
                 RTS                    ; Return.
 
-  .org $FFFA
+  .org $FFF
+  .segment "VECTORS"
 
                 .word   $0F00          ; NMI vector
                 .word   RESET          ; RESET vector
